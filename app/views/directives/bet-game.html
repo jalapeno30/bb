@@ -1,0 +1,99 @@
+<div class="row">
+    <div class="col-md-12">
+        <h4>{{ betGame.game.name }}</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <h5>2. <span translate>BUY_LOTTO.STEPS.CHOOSE_YOUR_DRAW</span></h5>
+            </div>
+            <form role="form" class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12 col-sm-6 col-xs-12" ng-repeat="draw in betGame.draws">
+                        <div class="well">
+                            <div class="checkbox">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-4 col-xs-6">
+                                        <label>
+                                            <input type="checkbox" ng-model="betGame.selectedDraws[draw.id]"/> <img class="img-responsive" ng-src="{{ betGame.game.logo }}" />
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9 col-sm-8 col-xs-12">
+                                        <div class="row">
+                                            <div class="col-md-3 col-sm-12">
+                                                {{draw.jackpot | currency: "P "}}<br />
+                                                {{draw.date | date : 'EEEE'}}
+                                            </div>
+
+                                            <div class="col-md-3 col-sm-12">
+                                                {{draw.date | date: "shortDate"}}
+                                            </div>
+
+                                            <div class="col-md-3 col-sm-12">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h5>3. <span translate>BUY_LOTTO.STEPS.CHOOSE_YOUR_SYSTEM</span></h5>
+                <div class="row">
+                    <div class="col-md-12" >
+                        <button ng-repeat="system in betGame.systems" type="button" class="btn btn-primary entry-buttons" ng-model="betGame.system" btn-radio="'{{system.name}}'">	{{ system.name }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h5>4. <span translate>BUY_LOTTO.STEPS.CHOOSE_YOUR_NUMBERS</span></h5>
+                <div class="col-md-6">
+
+                    <game-number-set numbers="{{ betGame.game.numbers }}" system="betGame.activeSystem" game="betGame.game"></game-number-set>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-info" ng-click="betGame.luckyPick()">Lucky Pick</button>
+                            <button class="btn btn-info" ng-click="betGame.autoPlay()">Auto Play</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h6 translate>BUY_LOTTO.BODY.SELECTED_NUMBERS</h6>
+                    <selected-number-set system="betGame.activeSystem" game="betGame.game" number-sets="betGame.numberSets"></selected-number-set>
+                    <!--<div class="row" ng-repeat="numSet in rangeSets() track by $index">-->
+                        <!--<div class="col-md-2 col-xs-1">-->
+                            <!--<table class="table label-table" >-->
+                                <!--<tr><td><strong>{{setLabels[$index]}}:</strong></td></tr>-->
+                            <!--</table>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-10 col-xs-11">-->
+                            <!--<div class="table-responsive numberSet">-->
+                                <!--<table class="table table-bordered table-striped bg-primary" ng-class="{'active': $index == activeSet}" ng-click="toggleSet($index)" num-set={{$index}}>-->
+                                    <!--<tr ng-hide="luckyPicks[$index]">-->
+                                        <!--<td class="selected-number col-sm-1" ng-repeat="selectable in getSelectableNumbers() track by $index">{{selectedNumbers[$parent.$index][$index]}}&nbsp;</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr ng-show="luckyPicks[$index]">-->
+                                        <!--<td>-->
+                                            <!--Lucky Pick<span class="pull-right"><button class="btn btn-xs" ng-click="unlucky($index)" translate>BUY_LOTTO.BUTTONS.RESET</button></span>-->
+                                        <!--</td>-->
+                                    <!--</tr>-->
+                                <!--</table>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="">
+                        <button class="btn btn-warning" ng-click="betGame.addOrder()" translate>BUY_LOTTO.BUTTONS.ADD_TO_CART</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

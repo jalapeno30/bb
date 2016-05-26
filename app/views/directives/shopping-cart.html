@@ -1,0 +1,66 @@
+<div class="col-md-3" id="orders">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row orders-header">
+        <div class="col-md-12">
+          <h4 translate>SHOPPING_CART.ORDERS</h4>
+        </div>
+      </div>
+      <div class="row orders-content">
+        <div class="col-md-12">
+          <div ng-if="shoppingCart.orders.length == 0" translate=>
+            SHOPPING_CART.NO_ORDERS
+          </div>
+          <div ng-if="shoppingCart.orders.length > 0">
+            <ul class="list-group">
+              <li class="list-group-item order-item" ng-repeat="order in shoppingCart.orders">
+                <div class="order-item-header">
+                  <div class="pull-right">
+                    <a href="" ng-click="shoppingCart.removeOrder(order.id)" translate style="cursor: pointer">SHOPPING_CART.REMOVE</a>
+                  </div>
+                  <h5>{{ order.gameName }}</h5>
+                </div>
+                <div class="order-item-content">
+                  <div class="row">
+                    <div class="col-md-12 col-sm-4 col-xs-12">
+                      <strong><span translate>SHOPPING_CART.DRAWS</span>: </strong>
+                      <div class="order-draws">
+                        <p>{{ order.drawDate }}</p>
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-4 col-xs-12">
+                      <strong><span translate>SHOPPING_CART.NUMBERS</span>: </strong>
+                      <div class="order-numbers">
+                        <p ng-repeat="numberSets in order.numbers">
+                          <em><span ng-repeat="number in numberSets track by $index">{{ number }}&nbsp;</span></em>
+                          <!--<strong>({{ selection.system }})</strong>-->
+                          <!--<span ng-show="numberSet.lucky">&nbsp;(LP)</span>-->
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pull-right">
+                    <strong>Cost: </strong>{{ order.orderCost | currency : "P" }}<br />
+                    <!--<strong>Tax: </strong>{{ bet.tax | currency : "P" }}-->
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row orders-footer">
+        <div class="col-md-12">
+          Total
+          <span class="orders-total"> {{ shoppingCart.cost | currency : "P" }} </span>
+          <span class="pull-right" ng-if="shoppingCart.orders.length > 0">
+            <button class="btn btn-danger" ng-click="shoppingCart.checkout()">
+              <i class="glyphicon glyphicon-shopping-cart"></i> <span translate>SHOPPING_CART.BUY_NOW</span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
